@@ -2,19 +2,22 @@
 
 	<head>
 		<title>Accueil</title>
-		<link rel="stylesheet" href="css_ppp.css">
+		<link rel="stylesheet" href="style.css">
 		<meta charset="utf-8" />
 	</head>
 	
 	<body>
+	<div class="menu">
 	
+		<?php
+			include("menu.php");
+		?>
+		
 <!-- Affichage des choix de repas -->
 		
 		<form action="commande.php" method="POST">
 		
-			<?php
-
-			?>
+			
 			<div id="repas">
 				<?php
 					echo "Menu +1€<br/>";
@@ -115,6 +118,7 @@
 						include("params.php");
 						
 //choix repas
+						$repas='0';
 						$n_repas=$_POST['repas'];
 						$reponse=$bdd->query("SELECT * FROM repas WHERE nom='$n_repas'");
 						while ($donnees = $reponse->fetch()){
@@ -205,17 +209,17 @@
 					
 // Afficher le résumé de la commande 
 					
-					echo '<b>Recapitulatif :</b></br>'.$n_repas.'</br>';
-					if($n_ingredients!='0'){
-						echo $n_ingredients.'</br>';
-					}
-					if($n_sauces!='0'){
-						echo $n_sauces.'</br>';
-					}
 					if($repas=='0'){
-						echo "erreur";
+						echo "Veuiller choisir un repas";
 					}
 					else{
+						echo '<b>Recapitulatif :</b></br>'.$n_repas.'</br>';
+						if($n_ingredients!='0'){
+							echo $n_ingredients.'</br>';
+						}
+						if($n_sauces!='0'){
+							echo $n_sauces.'</br>';
+						}
 						echo $n_boissons.'</br>'.$n_desserts.'</br>'.'prix: '.$prix.'€</br>';
 					
 					
@@ -224,7 +228,7 @@
 				<INPUT TYPE="submit" NAME="confirmer" value='Valider la commande'>
 				<?php
 					}
-					}
+				}
 				?>
 				
 				<INPUT TYPE="hidden" name="c_repas" value="<?php echo $repas ?>">
@@ -269,38 +273,42 @@
 							
 //Recherche d'un serveur avec le moins de commande(active)
 							$reponse=$bdd->query("SELECT id FROM comptes WHERE serving=1");
-							while ($donnees = $reponse->fetch()){
-								$idServ=$donnees['id'];
-								$cherche = $bdd->query("SELECT COUNT(idServeur) AS nombre FROM commandes WHERE idServeur='$idServ' AND effectue=0");
-								while ($donnees2 = $cherche->fetch()){
-									$nombre=$donnees2['nombre'];
-									if ($sav_n != null){
-										if($sav_n>$nombre){
+							if(($reponse->fetch())==null){
+								echo "Il n'y à aucun serveur de disponible, réessayez plus tard";
+							}
+							else{
+								$sav_n=null;
+								while ($donnees = $reponse->fetch()){
+									$idServ=$donnees['id'];
+									$cherche = $bdd->query("SELECT COUNT(idServeur) AS nombre FROM commandes WHERE idServeur='$idServ' AND effectue=0");
+									while ($donnees2 = $cherche->fetch()){
+										$nombre=$donnees2['nombre'];
+										if ($sav_n != null){
+											if($sav_n>$nombre){
+												$sav_n=$nombre;
+												$Serveur=$idServ;
+											}
+										}
+										else{
 											$sav_n=$nombre;
 											$Serveur=$idServ;
 										}
 									}
-									else{
-										$sav_n=$nombre;
-										$Serveur=$idServ;
-									}
 								}
-							}
 								
 //Insertion dans la base de donnée
-							if($repas!=0){
+
 								$bdd->exec("INSERT INTO commandesdetails VALUES ('$id',' $idCommande','$repas','$ingredients','$sauces','$boissons','$desserts','0')");
 								$bdd->exec("INSERT INTO commandes VALUES ('$idCommande','$numero','0','0','0','$Serveur','0','0','1','0','0','0','0')");
-							}
-							else{
-								echo "erreur";
-							}
 								
+								
+							}
 					}
 						
 				?>
 				
 			</div>
 			</form>
+	</div>
 	</body>
 </html>
