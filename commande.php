@@ -2,24 +2,23 @@
 
 	<head>
 		<title>Accueil</title>
-		<link rel="stylesheet" href="css_commande.css">
+		<link rel="stylesheet" href="css_ppp.css">
 		<meta charset="utf-8" />
 	</head>
 	
 	<body>
 	
 <!-- Affichage des choix de repas -->
-	<div id="explication">
-		Menu(Boisson+Dessert) pour 1€ en plus
 		
-	</div>
-	<div id="choix">
 		<form action="commande.php" method="POST">
 		
+			<?php
+
+			?>
 			<div id="repas">
 				<?php
 					echo "Menu +1€<br/>";
-					include("params_commande.php");
+					include("params.php");
 					$reponse = $bdd->query("SELECT * FROM repas");
 					while ($donnees = $reponse->fetch()){
 						if($donnees['reste'] != 0 OR $donnees['nombre'] != 0){
@@ -38,7 +37,7 @@
 		
 				<div id="ingredients">
 					<?php
-						include("params_commande.php");
+						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM ingredients");
 						while ($donnees = $reponse->fetch()){
 							if($donnees['reste'] != 0){
@@ -47,7 +46,7 @@
 								echo"<input type='checkbox' name='ingredients[]' value=$nom >";
 								echo $nom;
 								if($sup !=0){
-									echo " (+".$sup."€)";
+									echo " (supplement : ".$sup."€)";
 								}
 								echo "</br>";
 							}
@@ -59,7 +58,7 @@
 		
 				<div id="sauces">
 					<?php
-						include("params_commande.php");
+						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM sauces");
 						while ($donnees = $reponse->fetch()){
 							if($donnees['reste'] != 0){
@@ -74,38 +73,38 @@
 			
 <!-- Affichage des choix de boisson -->
 
-		<div id="boissons">
-		<?php
-			include("params_commande.php");
-			$reponse = $bdd->query("SELECT * FROM boissons");
-			while ($donnees = $reponse->fetch()){
-				if($donnees['reste'] != 0 OR $donnees['nombre'] != 0){
-					$nom=$donnees['nom'];
-					echo"<INPUT TYPE='radio' NAME='boissons' value='$nom'>";
-					echo $nom."<br>";
-				}
-			}
-		?>
-		</div>
+					<div id="boissons">
+					<?php
+						include("params.php");
+						$reponse = $bdd->query("SELECT * FROM boissons");
+						while ($donnees = $reponse->fetch()){
+							if($donnees['reste'] != 0 OR $donnees['nombre'] != 0){
+								$nom=$donnees['nom'];
+								echo"<INPUT TYPE='radio' NAME='boissons' value='$nom'>";
+								echo $nom."<br>";
+							}
+						}
+					?>
+					</div>
 			
 <!-- Affichage des choix de dessert -->
 			
-		<div id="desserts">
-		<?php
-			include("params_commande.php");
-			$reponse = $bdd->query("SELECT * FROM desserts");
-			while ($donnees = $reponse->fetch()){
-				if($donnees['reste'] != 0 OR $donnees['nombre'] != 0){
-					$nom=$donnees['nom'];
-					echo"<INPUT TYPE='radio' NAME='desserts' value='$nom'>";
-					echo $nom."<br>";
-				}
-			}
-		?>
-		</div>
-		<INPUT TYPE="submit" NAME="valider" value='Suivant'>
-	</div>
-	
+					<div id="desserts">
+					<?php
+						include("params.php");
+						$reponse = $bdd->query("SELECT * FROM desserts");
+						while ($donnees = $reponse->fetch()){
+							if($donnees['reste'] != 0 OR $donnees['nombre'] != 0){
+								$nom=$donnees['nom'];
+								echo"<INPUT TYPE='radio' NAME='desserts' value='$nom'>";
+								echo $nom."<br>";
+							}
+						}
+					?>
+				</div>
+				<INPUT TYPE="submit" NAME="valider" value='Suivant'>
+
+			
 <!-- valider la commande -->
 
 			<div id="valider">
@@ -113,7 +112,7 @@
 				<?php
 					
 					if(isset($_POST['valider'])){
-						include("params_commande.php");
+						include("params.php");
 						
 //choix repas
 						$n_repas=$_POST['repas'];
@@ -203,10 +202,6 @@
 					
 // Definition du prix
 					$prix=$p_repas+$sup_ingredients+$sup_sauces+$sup_boissons+$sup_desserts+$p_choix;
-?>
-
-	<div id="recap">
-<?php
 					
 // Afficher le résumé de la commande 
 					
@@ -231,16 +226,15 @@
 					}
 					}
 				?>
-	</div>
+				
 				<INPUT TYPE="hidden" name="c_repas" value="<?php echo $repas ?>">
 				<INPUT TYPE="hidden" name="c_ingredients" value="<?php echo $ingredients ?>">
 				<INPUT TYPE="hidden" name="c_sauces" value="<?php echo $sauces ?>">
 				<INPUT TYPE="hidden" name="c_boissons" value="<?php echo $boissons ?>">
 				<INPUT TYPE="hidden" name="c_desserts" value="<?php echo $desserts ?>">
-				
 				<?php
 					if (isset($_POST['confirmer'])){
-						include("params_commande_commande.php");
+						include("params.php");
 						$repas=$_POST['c_repas'];
 						$ingredients=$_POST['c_ingredients'];
 						$ingredients=$_POST['c_ingredients'];
