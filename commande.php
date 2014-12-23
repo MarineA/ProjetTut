@@ -2,20 +2,17 @@
 
 	<head>
 		<title>Accueil</title>
-		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="css_commande.css">
 		<meta charset="utf-8" />
 	</head>
 	
 	<body>
-	<div class="menu">
-		<?php
-			include("menu.php");
-		?>
 	
 <!-- Affichage des choix de repas -->
-		<div class="explication">
-			Menu(Boisson+Dessert) pour 1€ en plus
-		</div>
+	<div id="explication">
+		Menu(Boisson+Dessert) pour 1€ en plus
+		
+	</div>
 	<div id="choix">
 		<form action="commande.php" method="POST">
 		
@@ -311,6 +308,5 @@
 				
 			</div>
 			</form>
-	</div>
-</body>
+	</body>
 </html>

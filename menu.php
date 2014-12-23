@@ -1,5 +1,3 @@
-
-			
 			<form action="connect.php" method="post">
 				<table class="menuform">
 					<tr>
