@@ -7,6 +7,11 @@ try
 					{
 							die('Erreur : '.$e->getMessage());
 							
-							
+
+
+
+
+
+
 					}
 ?>
