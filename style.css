@@ -1,0 +1,190 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
+
+body{
+	font: 18px "Comic Sans", sans-serif;
+	background-size : cover; 
+	background-color : #F5F6F6;
+	background-image : url("images/fd.jpg");
+}
+
+* {
+	margin:0;
+	padding:0;
+}
+
+/* --------------------Formulaire de connection-------------------- */
+.menuform 
+{
+    border-collapse: collapse;
+	position : absolute;
+	left: 50%;
+	margin-left: 17%;
+	margin-bottom : 5px;
+	color : white;
+
+}
+
+/* --------------------Centrage-------------------- */
+.menu{
+	position: relative;
+	width: 1200px;
+	left: 50%;
+	margin-left: -600px;
+}
+
+/* --------------------Menu principal-------------------- */
+.menutab 
+{
+
+	margin-top : 30px;
+    border-collapse: collapse;
+	position : relative;
+	width: 100%;
+	height:20px;
+}
+
+
+
+.menutab td 
+{
+	
+	color:white;
+	text-align : center;
+	padding-top: 5px; 
+	padding-bottom: 5px; 
+}
+
+.menutab a{
+	font-size : 40px;
+	list-style-type: none; 
+	text-decoration:none;
+	font-size : 20px;
+	color : white;
+	text-shadow: 
+black 1px 1px 1px, 
+black -1px 1px 1px, 
+black -1px -1px 1px, 
+black 1px -1px 1px; 
+
+}
+
+/* --------------------Gestion de la forme du menu principal-------------------- */
+
+.interneMenu{
+	margin-top : 20px;
+	position : relative;
+	background-color : orange;
+	height : 40px;
+	padding: 10px;
+	border-bottom : 3px solid black;
+	border-top : 3px solid black;
+	
+}
+
+.interneMenuGauche{
+	margin-top : 20px;
+	position : relative;
+	background-color : orange;
+	height : 40px;
+	padding: 10px;
+	border-radius : 15px 0 0 15px;
+	border-bottom : 3px solid black;
+	border-top : 3px solid black;
+	border-left : 3px solid black;
+}
+
+.interneMenuDroite{
+	margin-top : 20px;
+	position : relative;
+	background-color : orange;
+	height : 40px;
+	padding: 10px;
+	border-radius : 0 15px 15px 0;
+	border-bottom : 3px solid black;
+	border-top : 3px solid black;
+	border-right : 3px solid black;
+}
+
+.interneLogo{
+	margin-top : 20px;
+	position : relative;
+	background-color : orange;
+	height : 40px;
+	padding: 10px;
+	z-index : 1;
+	border-bottom : 3px solid black;
+	border-top : 3px solid black;
+	
+}
+
+
+
+a:hover{
+	color:orange;
+}
+
+.logo{
+	margin-top : -60px;
+	padding : 10px;
+	border : 3px solid black;
+	background-color : white;
+	border-radius : 150px;
+	z-index : 2;
+}
+
+/* --------------------Bloc du contenu pricipal-------------------- */
+
+.contenu {
+	background-color : white;
+	border-radius : 20px;
+	opacity : 0.95;
+	margin-top : 70px;
+	position : relative;
+	width: 97%;
+	padding : 20px;
+}
+
+/* --------------------Affichage des statuts -------------------- */
+
+.statut{
+	padding : 10px;
+	width : 100%;
+	border-collapse : collapse;
+	margin-bottom : 10px;
+}
+
+.titreStatutGauche {
+	background-color : orange;
+	border-radius : 20px 0 0 0;
+	color : white;
+	width : 150px;
+}
+
+
+.titreStatutDroite {
+	background-color : black;
+	border-radius : 0 20px 0 0;
+	color : white;
+}
+
+.texteStatut {
+	background-color : grey;
+	border-radius : 0 0 20px 20px;
+	color : white;
+}
+
+
+/* --------------------Tables de gestion des admin -------------------- */
+
+.admintable{
+	width : 100%;
+	border-collapse: collapse;
+}
+
+.admintable td{
+	border : 1px solid grey;
+}
+
+.admintable th{
+	background-color : grey;
+}
