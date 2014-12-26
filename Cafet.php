@@ -39,7 +39,7 @@
 								$accord="s";
 							}
 							echo"<INPUT TYPE='radio' NAME='repas' value='$nom'>";
-							echo " ".$nom."</br><sous-titre>     (".$prix."€ ,".$nb_ingr." ingredient".$accord.")</sous-titre><br>";
+							echo " ".$nom."</br><sous-titre>(".$prix."€ ,".$nb_ingr." ingredient".$accord.")</sous-titre><br>";
 						}
 					}
 				?>
@@ -57,10 +57,10 @@
 							if($donnees['reste'] != 0){
 								$nom=$donnees['nom'];
 								$sup=$donnees['supplement'];
-								echo"<input type='checkbox' name='ingredients[]' value=$nom >";
+								echo"<input type='checkbox' name='ingredients[]' value='$nom' >";
 								echo " ".$nom;
 								if($sup !=0){
-									echo " (supp : ".$sup."€)";
+									echo "<sous-titre> (supp : ".$sup."€)</sous-titre>";
 								}
 								echo "</br>";
 							}
@@ -78,8 +78,13 @@
 						while ($donnees = $reponse->fetch()){
 							if($donnees['reste'] != 0){
 								$nom=$donnees['nom'];
-								echo"<INPUT TYPE='checkbox' NAME='sauces[]' value='$nom'>";
-								echo " ".$nom."<br>";
+								$sup=$donnees['supplement'];
+								echo"<input type='checkbox' name='sauces[]' value='$nom' >";
+								echo " ".$nom;
+								if($sup !=0){
+									echo "<sous-titre> (supp : ".$sup."€)</sous-titre>";
+								}
+								echo "</br>";
 							}
 						}
 					?>
@@ -94,10 +99,15 @@
 						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM boissons");
 						while ($donnees = $reponse->fetch()){
-							if($donnees['reste'] != 0 OR $donnees['nombre'] != 0){
+							if($donnees['reste'] != 0){
 								$nom=$donnees['nom'];
-								echo"<INPUT TYPE='radio' NAME='boissons' value='$nom'>";
-								echo " ".$nom."<br>";
+								$sup=$donnees['supplement'];
+								echo"<input TYPE='radio' name='boissons' value='$nom' >";
+								echo " ".$nom;
+								if($sup !=0){
+									echo "<sous-titre> (supp : ".$sup."€)</sous-titre>";
+								}
+								echo "</br>";
 							}
 						}
 					?>
@@ -111,10 +121,15 @@
 						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM desserts");
 						while ($donnees = $reponse->fetch()){
-							if($donnees['reste'] != 0 OR $donnees['nombre'] != 0){
+							if($donnees['reste'] != 0){
 								$nom=$donnees['nom'];
-								echo"<INPUT TYPE='radio' NAME='desserts' value='$nom'>";
-								echo " ".$nom."<br>";
+								$sup=$donnees['supplement'];
+								echo"<input TYPE='radio' name='desserts' value='$nom' >";
+								echo " ".$nom;
+								if($sup !=0){
+									echo "<sous-titre> (supp : ".$sup."€)</sous-titre>";
+								}
+								echo "</br>";
 							}
 						}
 					
