@@ -11,15 +11,21 @@
 	
 		<?php
 			include("menu.php");
+		?>
+		<div class="contenu">
+		<?php
 			if(isset($_POST['precedent'])||(!(isset($_POST['suivant'])||isset($_POST['confirmer'])))){
 		?>
-				
+		
 <!-- Affichage des choix de repas -->
 		<form action="Cafet.php" method="POST">
-			
+			<div id="affichage">
+			<div id="information">
+			<br>
+			</div>
 			<div id="repas">
+			<img src="images/repas.gif"></img></br></br>
 				<?php
-					echo "Menu +1€<br/>";
 					include("params.php");
 					$reponse = $bdd->query("SELECT * FROM repas");
 					while ($donnees = $reponse->fetch()){
@@ -38,6 +44,7 @@
 <!-- Affichage des choix des ingredients -->
 		
 				<div id="ingredients">
+				<img src="images/ingredients.gif"></img></br></br>
 					<?php
 						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM ingredients");
@@ -48,7 +55,7 @@
 								echo"<input type='checkbox' name='ingredients[]' value=$nom >";
 								echo $nom;
 								if($sup !=0){
-									echo " (supplement : ".$sup."€)";
+									echo " (supp : ".$sup."€)";
 								}
 								echo "</br>";
 							}
@@ -59,6 +66,7 @@
 <!-- Affichage des choix de sauces -->
 		
 				<div id="sauces">
+				<img src="images/sauces.gif"></img></br></br>
 					<?php
 						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM sauces");
@@ -76,6 +84,7 @@
 <!-- Affichage des choix de boisson -->
 
 					<div id="boissons">
+					<img src="images/boissons.gif"></img></br></br>
 					<?php
 						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM boissons");
@@ -92,6 +101,7 @@
 <!-- Affichage des choix de dessert -->
 			
 					<div id="desserts">
+					<img src="images/desserts.gif"></img></br></br>
 					<?php
 						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM desserts");
@@ -105,7 +115,8 @@
 					
 					?>
 				</div>
-				<INPUT TYPE="submit" NAME="suivant" value='Suivant'>
+				</div>
+				<INPUT TYPE="submit" NAME="suivant" value="" id="bouton_suivant">
 			</form>
 		<?php
 			}
@@ -229,10 +240,12 @@
 				<INPUT TYPE="hidden" name="c_sauces" value="<?php echo $sauces ?>">
 				<INPUT TYPE="hidden" name="c_boissons" value="<?php echo $boissons ?>">
 				<INPUT TYPE="hidden" name="c_desserts" value="<?php echo $desserts ?>">
-				
+				<div id="b_precedent">
+					<INPUT TYPE="submit" NAME="precedent" value='Précédent'>
+				</div>
 <?php
 										
-// Afficher le résumé de la commande 
+// Afficher le résumé de la commande (si un repas est choisi)
 					
 					if($repas=='0'){
 						echo "Veuiller choisir un repas";
@@ -247,14 +260,15 @@
 							echo $n_sauces.'</br>';
 						}
 						echo $n_boissons.'</br>'.$n_desserts.'</br>'.'prix: '.$prix.'€</br>';
-					}
+					
 ?>
-
-					<INPUT TYPE="submit" NAME="precedent" value='Précédent'>
+<!-- Creation du bouton confirmer si possible -->
+				<div id="b_confirmer">
 					<INPUT TYPE="submit" NAME="confirmer" value='Valider la commande'>
-				
+				</div>
 				</form>
 				<?php
+					}
 				}
 					if (isset($_POST['confirmer'])){
 						include("params.php");
@@ -326,6 +340,6 @@
 				?>
 				
 			</div>
-	</div>
+		</div>
 	</body>
 </html>

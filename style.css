@@ -188,3 +188,76 @@ a:hover{
 .admintable th{
 	background-color : grey;
 }
+
+
+
+
+
+
+/* -------------------- Cafet -------------------- */
+#affichage{
+	position:relative;
+}
+
+#information{
+	
+	display: inline-table;
+	background-image:url(images/menu_info.gif);
+	background-repeat:no-repeat;
+	width:200px;
+	height:300px;
+}
+
+#repas{
+	display: inline-table;
+	background-color : orange;
+	padding: 15px;
+	border-radius : 15px 15px 15px 15px;
+	border-bottom : 3px solid black;
+	border: 3px solid black;
+	margin-left:10px;
+}
+#ingredients{
+	display: inline-table;
+	background-color : orange;
+	padding: 10px;
+	border-radius : 15px 15px 15px 15px;
+	border-bottom : 3px solid black;
+	border: 3px solid black;
+}
+#sauces{
+	display: inline-table;
+	background-color : orange;
+	padding: 10px;
+	border-radius : 15px 15px 15px 15px;
+	border-bottom : 3px solid black;
+	border: 3px solid black;
+}
+#boissons{
+	display: inline-table;
+	background-color : orange;
+	padding: 10px;
+	border-radius : 15px 15px 15px 15px;
+	border-bottom : 3px solid black;
+	border: 3px solid black;
+}
+#desserts{
+	display: inline-table;
+	background-color : orange;
+	padding: 10px;
+	border-radius : 15px 15px 15px 15px;
+	border-bottom : 3px solid black;
+	border: 3px solid black;
+}
+#bouton_suivant{
+	background-image: url(images/bouton_suivant.gif);
+	background-repeat:no-repeat;
+	width:187px;
+	height:59px;
+	border:0;
+	border-radius : 10px 10px 10px 10px;
+	margin-left:80%;
+}
+#bouton_suivant:hover{
+	background-image: url(images/bouton_suivant_hover.gif);
+}
