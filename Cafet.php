@@ -11,11 +11,12 @@
 	
 		<?php
 			include("menu.php");
+			if(isset($_POST['precedent'])||(!(isset($_POST['suivant'])||isset($_POST['confirmer'])))){
 		?>
-		
+				
 <!-- Affichage des choix de repas -->
-<!-- test git Virtosh lol -->	
-		<form action="commande.php" method="POST">
+		<form action="Cafet.php" method="POST">
+			
 			<div id="repas">
 				<?php
 					echo "Menu +1€<br/>";
@@ -101,18 +102,22 @@
 								echo $nom."<br>";
 							}
 						}
+					
 					?>
 				</div>
-				<INPUT TYPE="submit" NAME="valider" value='Suivant'>
-
-			
+				<INPUT TYPE="submit" NAME="suivant" value='Suivant'>
+			</form>
+		<?php
+			}
+		?>
+		
 <!-- valider la commande -->
 
 			<div id="valider">
 				
 				<?php
 					
-					if(isset($_POST['valider'])){
+					if(isset($_POST['suivant'])){
 						include("params.php");
 						
 //choix repas
@@ -223,6 +228,16 @@
 						echo "Veuiller choisir un repas";
 					}
 					else{
+?>
+			<form action="Cafet.php" method="POST">
+				<INPUT TYPE="hidden" name="c_repas" value="<?php echo $repas ?>">
+				<INPUT TYPE="hidden" name="c_ingredients" value="<?php echo $ingredients ?>">
+				<INPUT TYPE="hidden" name="c_sauces" value="<?php echo $sauces ?>">
+				<INPUT TYPE="hidden" name="c_boissons" value="<?php echo $boissons ?>">
+				<INPUT TYPE="hidden" name="c_desserts" value="<?php echo $desserts ?>">
+				
+<?php
+			
 						echo '<b>Recapitulatif :</b></br>'.$n_repas.'</br>';
 						if($n_ingredients!='0'){
 							echo $n_ingredients.'</br>';
@@ -231,21 +246,15 @@
 							echo $n_sauces.'</br>';
 						}
 						echo $n_boissons.'</br>'.$n_desserts.'</br>'.'prix: '.$prix.'€</br>';
-					
-					
-				?>
-				<INPUT TYPE="submit" NAME="confirmer" value='Valider la commande'>
-				<?php
 					}
-				}
-				?>
+?>
+
+					<INPUT TYPE="submit" NAME="precedent" value='Précédent'>
+					<INPUT TYPE="submit" NAME="confirmer" value='Valider la commande'>
 				
-				<INPUT TYPE="hidden" name="c_repas" value="<?php echo $repas ?>">
-				<INPUT TYPE="hidden" name="c_ingredients" value="<?php echo $ingredients ?>">
-				<INPUT TYPE="hidden" name="c_sauces" value="<?php echo $sauces ?>">
-				<INPUT TYPE="hidden" name="c_boissons" value="<?php echo $boissons ?>">
-				<INPUT TYPE="hidden" name="c_desserts" value="<?php echo $desserts ?>">
+				</form>
 				<?php
+				}
 					if (isset($_POST['confirmer'])){
 						include("params.php");
 						$repas=$_POST['c_repas'];
@@ -318,7 +327,6 @@
 				?>
 				
 			</div>
-			</form>
 	</div>
 	</body>
 </html>
