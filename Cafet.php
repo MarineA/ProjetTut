@@ -290,12 +290,7 @@
 
 							
 //Recherche d'un serveur avec le moins de commande(active)
-							$reponse=$bdd->query("SELECT id FROM comptes WHERE serving=1");
-								$test=$reponse;
-								if(empty($test->fetch())){
-									echo "Il n'y à aucun membre de disponible, réessayez plus tard";
-								}
-								else{
+								$reponse=$bdd->query("SELECT id FROM comptes WHERE serving=1");
 								while ($donnees = $reponse->fetch()){
 									$idServ=$donnees['id'];
 									$cherche = $bdd->query("SELECT COUNT(idServeur) AS nombre FROM commandes WHERE idServeur='$idServ' AND effectue=0");
@@ -315,12 +310,14 @@
 									}
 								}
 								
-//Insertion dans la base de donnée
-
+//Insertion dans la base de donnée (si serveur)
+								if($Serveur==0){
+									echo"Il n'y a pas de personne pouvant recevoir vos commandes";
+								}
+								else{
 								$bdd->exec("INSERT INTO commandesdetails VALUES ('$id',' $idCommande','$repas','$ingredients','$sauces','$boissons','$desserts','0')");
 								$bdd->exec("INSERT INTO commandes VALUES ('$idCommande','$numero','0','0','0','$Serveur','0','0','1','0','0','0','0')");
 								}
-								
 							}
 					
 						
