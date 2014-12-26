@@ -221,13 +221,7 @@
 					
 // Definition du prix
 					$prix=$p_repas+$sup_ingredients+$sup_sauces+$sup_boissons+$sup_desserts+$p_choix+$sup_nb_ingredients;
-					
-// Afficher le résumé de la commande 
-					
-					if($repas=='0'){
-						echo "Veuiller choisir un repas";
-					}
-					else{
+
 ?>
 			<form action="Cafet.php" method="POST">
 				<INPUT TYPE="hidden" name="c_repas" value="<?php echo $repas ?>">
@@ -237,6 +231,13 @@
 				<INPUT TYPE="hidden" name="c_desserts" value="<?php echo $desserts ?>">
 				
 <?php
+										
+// Afficher le résumé de la commande 
+					
+					if($repas=='0'){
+						echo "Veuiller choisir un repas";
+					}
+					else{
 			
 						echo '<b>Recapitulatif :</b></br>'.$n_repas.'</br>';
 						if($n_ingredients!='0'){
@@ -318,6 +319,7 @@
 								$bdd->exec("INSERT INTO commandesdetails VALUES ('$id',' $idCommande','$repas','$ingredients','$sauces','$boissons','$desserts','0')");
 								$bdd->exec("INSERT INTO commandes VALUES ('$idCommande','$numero','0','0','0','$Serveur','0','0','1','0','0','0','0')");
 								}
+								
 							}
 					
 						
