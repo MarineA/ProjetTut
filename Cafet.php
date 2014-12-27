@@ -1,8 +1,9 @@
 <!doctype HTML>
 
 	<head>
-		<title>Accueil</title>
+		<title>Cafet'</title>
 		<link rel="stylesheet" href="style.css">
+		<link rel="icon"  href="images/logo_BDE.ico" />
 		<meta charset="utf-8" />
 	</head>
 	
@@ -39,7 +40,7 @@
 								$accord="s";
 							}
 							echo"<INPUT TYPE='radio' NAME='repas' value='$nom'>";
-							echo " ".$nom."</br><sous-titre>(".$prix."€ ,".$nb_ingr." ingredient".$accord.")</sous-titre><br>";
+							echo " ".$nom."</br><sous-titre>(".$prix."€ ,".$nb_ingr." ingredient".$accord.")</br></br></sous-titre>";
 						}
 					}
 				?>
@@ -60,7 +61,7 @@
 								echo"<input type='checkbox' name='ingredients[]' value='$nom' >";
 								echo " ".$nom;
 								if($sup !=0){
-									echo "<sous-titre> (supp : ".$sup."€)</sous-titre>";
+									echo "<suplement> (supp : ".$sup."€)</suplement>";
 								}
 								echo "</br>";
 							}
@@ -261,7 +262,7 @@
 				<INPUT TYPE="hidden" name="c_boissons" value="<?php echo $boissons ?>">
 				<INPUT TYPE="hidden" name="c_desserts" value="<?php echo $desserts ?>">
 				<div id="b_precedent">
-					<INPUT TYPE="submit" NAME="precedent" value='Précédent'>
+					<INPUT TYPE="submit" NAME="precedent" value="" id="bouton_precedent">
 				</div>
 <?php
 										
@@ -284,7 +285,7 @@
 ?>
 <!-- Creation du bouton confirmer si possible -->
 				<div id="b_confirmer">
-					<INPUT TYPE="submit" NAME="confirmer" value='Valider la commande'>
+					<INPUT TYPE="submit" NAME="confirmer" value="" id="bouton_confirmer">
 				</div>
 				</form>
 				<?php
