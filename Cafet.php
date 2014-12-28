@@ -12,6 +12,7 @@
 	
 		<?php
 			include("menu.php");
+			include("params.php");
 		?>
 		<div class="contenu">
 		<?php
@@ -27,7 +28,6 @@
 			<div id="repas">
 			<img src="images/repas.gif"></img></br></br>
 				<?php
-					include("params.php");
 					$reponse = $bdd->query("SELECT * FROM repas");
 					while ($donnees = $reponse->fetch()){
 						if($donnees['reste'] != 0 OR $donnees['nombre'] != 0){
@@ -52,7 +52,6 @@
 				<div id="ingredients">
 				<img src="images/ingredients.gif"></img></br></br>
 					<?php
-						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM ingredients");
 						while ($donnees = $reponse->fetch()){
 							if($donnees['reste'] != 0){
@@ -74,7 +73,6 @@
 				<div id="sauces">
 				<img src="images/sauces.gif"></img></br></br>
 					<?php
-						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM sauces");
 						while ($donnees = $reponse->fetch()){
 							if($donnees['reste'] != 0){
@@ -97,7 +95,6 @@
 					<div id="boissons">
 					<img src="images/boissons.gif"></img></br></br>
 					<?php
-						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM boissons");
 						while ($donnees = $reponse->fetch()){
 							if($donnees['reste'] != 0){
@@ -119,7 +116,6 @@
 					<div id="desserts">
 					<img src="images/desserts.gif"></img></br></br>
 					<?php
-						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM desserts");
 						while ($donnees = $reponse->fetch()){
 							if($donnees['reste'] != 0){
@@ -133,11 +129,12 @@
 								echo "</br>";
 							}
 						}
-					
 					?>
 				</div>
 				</div>
-				<INPUT TYPE="submit" NAME="suivant" value="" id="bouton_suivant">
+				<div class="bouton">
+					<INPUT TYPE="submit" NAME="suivant" value="" id="bouton_suivant">
+				</div>
 			</form>
 		<?php
 			}
@@ -150,7 +147,6 @@
 				<?php
 					
 					if(isset($_POST['suivant'])){
-						include("params.php");
 						
 //choix repas
 						$repas='0';
@@ -206,7 +202,7 @@
 					}
 
 //choix boissons
-					
+				
 					$boissons='0';
 					$n_boissons=$_POST['boissons'];
 					$reponse=$bdd->query("SELECT * FROM boissons WHERE nom='$n_boissons'");
@@ -238,7 +234,6 @@
 						else if($desserts!=0){
 							$p_choix=0.8;
 						}
-						
 					}
 //Definition supplement plus d'ingrédients
 					$sup_nb_ingredients=0;
@@ -255,21 +250,19 @@
 					$prix=$p_repas+$sup_ingredients+$sup_sauces+$sup_boissons+$sup_desserts+$p_choix+$sup_nb_ingredients;
 
 ?>
-			<form action="Cafet.php" method="POST">
-				<INPUT TYPE="hidden" name="c_repas" value="<?php echo $repas ?>">
-				<INPUT TYPE="hidden" name="c_ingredients" value="<?php echo $ingredients ?>">
-				<INPUT TYPE="hidden" name="c_sauces" value="<?php echo $sauces ?>">
-				<INPUT TYPE="hidden" name="c_boissons" value="<?php echo $boissons ?>">
-				<INPUT TYPE="hidden" name="c_desserts" value="<?php echo $desserts ?>">
-				<div id="b_precedent">
-					<INPUT TYPE="submit" NAME="precedent" value="" id="bouton_precedent">
-				</div>
+			
+			<div id="recap">
 <?php
 										
 // Afficher le résumé de la commande (si un repas est choisi)
 					
 					if($repas=='0'){
 						echo "Veuiller choisir un repas";
+					?>
+				</div>
+					<form action="Cafet.php" method="POST">
+					<div class="bouton">
+					<?php
 					}
 					else{
 			
@@ -284,12 +277,24 @@
 					
 ?>
 <!-- Creation du bouton confirmer si possible -->
-				<div id="b_confirmer">
-					<INPUT TYPE="submit" NAME="confirmer" value="" id="bouton_confirmer">
 				</div>
-				</form>
+				<form action="Cafet.php" method="POST">
+				<div class="bouton">
+					<INPUT TYPE="submit" NAME="confirmer" value="" id="bouton_confirmer">
 				<?php
 					}
+				?>
+				
+					<INPUT TYPE="submit" NAME="precedent" value="" id="bouton_precedent">
+				</div>
+				<INPUT TYPE="hidden" name="c_repas" value="<?php echo $repas ?>">
+				<INPUT TYPE="hidden" name="c_ingredients" value="<?php echo $ingredients ?>">
+				<INPUT TYPE="hidden" name="c_sauces" value="<?php echo $sauces ?>">
+				<INPUT TYPE="hidden" name="c_boissons" value="<?php echo $boissons ?>">
+				<INPUT TYPE="hidden" name="c_desserts" value="<?php echo $desserts ?>">
+				</form>
+				<?php
+					
 				}
 					if (isset($_POST['confirmer'])){
 						include("params.php");
