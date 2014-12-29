@@ -12,14 +12,6 @@ body{
 	padding:0;
 }
 
-sous-titre{
-	display:block;
-	font-size:14px;
-	font-style:italic;
-	line-height:10px;
-	margin-left:15px;
-}
-
 /* --------------------Formulaire de connection-------------------- */
 .menuform 
 {
@@ -210,6 +202,14 @@ a:hover{
 	left:-10px;
 }
 
+sous-titre{
+	display:block;
+	font-size:14px;
+	font-style:italic;
+	line-height:10px;
+	margin-left:15px;
+}
+
 #information{
 	
 	display: inline-Block;
@@ -224,7 +224,6 @@ a:hover{
 	background-color : orange;
 	padding: 5px;
 	border-radius : 15px 15px 15px 15px;
-	border-bottom : 3px solid black;
 	border: 3px solid black;
 	margin-left:10px;
 }
@@ -233,7 +232,6 @@ a:hover{
 	background-color : orange;
 	padding: 5px;
 	border-radius : 15px 15px 15px 15px;
-	border-bottom : 3px solid black;
 	border: 3px solid black;
 }
 #sauces{
@@ -241,7 +239,6 @@ a:hover{
 	background-color : orange;
 	padding: 5px;
 	border-radius : 15px 15px 15px 15px;
-	border-bottom : 3px solid black;
 	border: 3px solid black;
 }
 #boissons{
@@ -249,7 +246,6 @@ a:hover{
 	background-color : orange;
 	padding: 5px;
 	border-radius : 15px 15px 15px 15px;
-	border-bottom : 3px solid black;
 	border: 3px solid black;
 }
 #desserts{
@@ -257,13 +253,46 @@ a:hover{
 	background-color : orange;
 	padding: 5px;
 	border-radius : 15px 15px 15px 15px;
-	border-bottom : 3px solid black;
 	border: 3px solid black;
 }
 
 /* -------------------- Etape 2 -------------------- */
-#recap{
-	margin-left: 55%;
+#recap_compte{
+	display:inline-table;
+	background-color : black;
+	color:orange;
+	border-radius : 15px 15px 15px 15px;
+	border: 3px solid orange;
+	margin-left: 15%;
+	padding: 2.5%;
+	width:25%;
+}
+solde{
+	position: absolute;
+	left:30%;
+}
+
+
+#recap_commande{
+	display:inline-table;
+	background-color : black;
+	color:orange;
+	border-radius : 15px 15px 15px 15px;
+	border: 3px solid orange;
+	margin-left: 10%;
+	padding: 2.5%;
+	width:25%;
+}
+
+sous-repas{
+	display:block;
+	font-size:16px;
+	line-height:15px;
+	margin-left:20px;
+}
+prix{
+	position: absolute;
+	right:17.5%;
 }
 
 
