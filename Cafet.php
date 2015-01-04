@@ -1,8 +1,9 @@
 <!doctype HTML>
 
 	<head>
-		<title>Accueil</title>
+		<title>Cafet'</title>
 		<link rel="stylesheet" href="style.css">
+		<link rel="icon"  href="images/logo_BDE.ico" />
 		<meta charset="utf-8" />
 	</head>
 	
@@ -11,6 +12,7 @@
 	
 		<?php
 			include("menu.php");
+			include("params.php");
 		?>
 		<div class="contenu">
 		<?php
@@ -26,7 +28,6 @@
 			<div id="repas">
 			<img src="images/repas.gif"></img></br></br>
 				<?php
-					include("params.php");
 					$reponse = $bdd->query("SELECT * FROM repas");
 					while ($donnees = $reponse->fetch()){
 						if($donnees['reste'] != 0 OR $donnees['nombre'] != 0){
@@ -39,7 +40,7 @@
 								$accord="s";
 							}
 							echo"<INPUT TYPE='radio' NAME='repas' value='$nom'>";
-							echo " ".$nom."</br><sous-titre>(".$prix."€ ,".$nb_ingr." ingredient".$accord.")</sous-titre><br>";
+							echo " ".$nom."</br><sous-titre>(".$prix."€ ,".$nb_ingr." ingredient".$accord.")</br></br></sous-titre>";
 						}
 					}
 				?>
@@ -51,7 +52,6 @@
 				<div id="ingredients">
 				<img src="images/ingredients.gif"></img></br></br>
 					<?php
-						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM ingredients");
 						while ($donnees = $reponse->fetch()){
 							if($donnees['reste'] != 0){
@@ -60,7 +60,7 @@
 								echo"<input type='checkbox' name='ingredients[]' value='$nom' >";
 								echo " ".$nom;
 								if($sup !=0){
-									echo "<sous-titre> (supp : ".$sup."€)</sous-titre>";
+									echo "<suplement> (supp : ".$sup."€)</suplement>";
 								}
 								echo "</br>";
 							}
@@ -73,7 +73,6 @@
 				<div id="sauces">
 				<img src="images/sauces.gif"></img></br></br>
 					<?php
-						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM sauces");
 						while ($donnees = $reponse->fetch()){
 							if($donnees['reste'] != 0){
@@ -96,7 +95,6 @@
 					<div id="boissons">
 					<img src="images/boissons.gif"></img></br></br>
 					<?php
-						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM boissons");
 						while ($donnees = $reponse->fetch()){
 							if($donnees['reste'] != 0){
@@ -118,7 +116,6 @@
 					<div id="desserts">
 					<img src="images/desserts.gif"></img></br></br>
 					<?php
-						include("params.php");
 						$reponse = $bdd->query("SELECT * FROM desserts");
 						while ($donnees = $reponse->fetch()){
 							if($donnees['reste'] != 0){
@@ -132,11 +129,12 @@
 								echo "</br>";
 							}
 						}
-					
 					?>
 				</div>
 				</div>
-				<INPUT TYPE="submit" NAME="suivant" value="" id="bouton_suivant">
+				<div class="bouton">
+					<INPUT TYPE="submit" NAME="suivant" value="" id="bouton_suivant">
+				</div>
 			</form>
 		<?php
 			}
@@ -149,7 +147,6 @@
 				<?php
 					
 					if(isset($_POST['suivant'])){
-						include("params.php");
 						
 //choix repas
 						$repas='0';
@@ -205,7 +202,7 @@
 					}
 
 //choix boissons
-					
+				
 					$boissons='0';
 					$n_boissons=$_POST['boissons'];
 					$reponse=$bdd->query("SELECT * FROM boissons WHERE nom='$n_boissons'");
@@ -228,7 +225,7 @@
 					$t_choix=null;
 					if($boissons!=0 && $desserts!=0){
 						$p_choix=1;
-						$t_choix="menu";
+						$t_choix="Menu ";
 					}
 					else {
 						if($boissons!=0){
@@ -237,7 +234,6 @@
 						else if($desserts!=0){
 							$p_choix=0.8;
 						}
-						
 					}
 //Definition supplement plus d'ingrédients
 					$sup_nb_ingredients=0;
@@ -254,41 +250,131 @@
 					$prix=$p_repas+$sup_ingredients+$sup_sauces+$sup_boissons+$sup_desserts+$p_choix+$sup_nb_ingredients;
 
 ?>
-			<form action="Cafet.php" method="POST">
-				<INPUT TYPE="hidden" name="c_repas" value="<?php echo $repas ?>">
-				<INPUT TYPE="hidden" name="c_ingredients" value="<?php echo $ingredients ?>">
-				<INPUT TYPE="hidden" name="c_sauces" value="<?php echo $sauces ?>">
-				<INPUT TYPE="hidden" name="c_boissons" value="<?php echo $boissons ?>">
-				<INPUT TYPE="hidden" name="c_desserts" value="<?php echo $desserts ?>">
-				<div id="b_precedent">
-					<INPUT TYPE="submit" NAME="precedent" value='Précédent'>
-				</div>
+			
+			<div id="recap_compte">
+				<?php
+//Recap du compte (provisoir)
+				$reponse=$bdd->query("SELECT * FROM comptes WHERE nom='MARET'");
+				while($donnees = $reponse->fetch()){
+					$nom=$donnees['nom'];
+					$prenom=$donnees['prenom'];
+					$solde_init=$donnees['solde'];
+					$solde_final=$solde_init-$prix;
+					echo 'Nom:<solde>'.$nom.'</solde></br>Prenom:<solde>'.$prenom.'</solde></br>Solde initiale:<solde>'.$solde_init.'€</solde></br>Solde finale:<solde>'.$solde_final.'€</solde>';
+				}
+				?>
+			</div>
+			<div id="recap_commande">
 <?php
 										
 // Afficher le résumé de la commande (si un repas est choisi)
 					
 					if($repas=='0'){
-						echo "Veuiller choisir un repas";
+						if($repas=='0'){
+							echo "Veuiller choisir un repas";
+						}
+					?>
+				</div>
+					<form action="Cafet.php" method="POST">
+					<div class="bouton">
+					<?php
 					}
 					else{
 			
-						echo '<b>Recapitulatif :</b></br>'.$n_repas.'</br>';
+						echo '<b>Recapitulatif :</b></br></br>'.$t_choix.$n_repas;
+						if($t_choix=="Menu "){
+							$prix_repas=$p_repas+1;
+						}
+						else{
+							$prix_repas=$p_repas;
+						}
+							echo '<prix>'.$prix_repas.'€</prix></br><sous-repas>';
+						
+						
 						if($n_ingredients!='0'){
-							echo $n_ingredients.'</br>';
+							echo $n_ingredients;
+							if($sup_ingredients!=0){
+								echo '<prix>'.$sup_ingredients.'</prix>';
+							}
+							if($sup_nb_ingredients!=null){
+								echo '<sous-titre>(ingredients supplementaire)<prix>'.$sup_nb_ingredients.'€</prix></sous-titre>';
+							}
+							
+							echo '</br>';
 						}
 						if($n_sauces!='0'){
-							echo $n_sauces.'</br>';
+							echo $n_sauces;
+							if($sup_sauces!=0){
+								echo '<prix>'.$sup_sauces.'</prix>';
+							}
+							
+							echo '</br>';
 						}
-						echo $n_boissons.'</br>'.$n_desserts.'</br>'.'prix: '.$prix.'€</br>';
-					
+						echo '</sous-repas></br>';
+						
+						
+						if($n_boissons!=null){
+							echo $n_boissons;
+							
+							if($t_choix=="Menu "){
+								if($sup_boissons!=0){
+										echo '<prix>'.$sup_boissons.'€</prix>';
+								}
+							}
+							else{
+								$p_boissons=$sup_boissons+0.5;
+								echo '<prix>'.$p_boissons.'€</prix>';
+							}
+						}
+						echo '</br>';
+						
+						
+						if($n_desserts!=null){
+							echo $n_desserts;
+							
+							if($t_choix=="Menu "){
+								if($sup_desserts!=0){
+										echo '<prix>'.$sup_desserts.'€</prix>';
+								}
+							}
+							else{
+								$p_desserts=$sup_desserts+0.8;
+								echo '<prix>'.$p_desserts.'€</prix>';
+							}
+						}
+						echo '</br></br>'.'Total: <prix>'.$prix.'€</prix></br>';
+						
+						if($solde_final<0){
+?>						
+						</div>
+						<form action="Cafet.php" method="POST">
+						<div class="bouton">
+<?php
+						}
+						else{
 ?>
 <!-- Creation du bouton confirmer si possible -->
-				<div id="b_confirmer">
-					<INPUT TYPE="submit" NAME="confirmer" value='Valider la commande'>
+						</div>
+						<form action="Cafet.php" method="POST">
+						<div class="bouton">
+							<INPUT TYPE="submit" NAME="confirmer" value="" id="bouton_confirmer">
+				<?php
+						}
+					}
+					
+				?>
+				
+					<INPUT TYPE="submit" NAME="precedent" value="" id="bouton_precedent">
 				</div>
+				<INPUT TYPE="hidden" name="c_repas" value="<?php echo $repas ?>">
+				<INPUT TYPE="hidden" name="c_ingredients" value="<?php echo $ingredients ?>">
+				<INPUT TYPE="hidden" name="c_sauces" value="<?php echo $sauces ?>">
+				<INPUT TYPE="hidden" name="c_boissons" value="<?php echo $boissons ?>">
+				<INPUT TYPE="hidden" name="c_desserts" value="<?php echo $desserts ?>">
+				<INPUT TYPE="hidden" name="c_solde_final" value="<?php echo $solde_final ?>">
 				</form>
 				<?php
-					}
+					
 				}
 					if (isset($_POST['confirmer'])){
 						include("params.php");
@@ -298,6 +384,7 @@
 						$sauces=$_POST['c_sauces'];
 						$boissons=$_POST['c_boissons'];
 						$desserts=$_POST['c_desserts'];
+						$solde_final=$_POST['c_solde_final'];
 						
 												
 //Teste si la table est vide (si oui creer une fausse commande pour eviter le probleme de la 1ere commande						
@@ -350,8 +437,17 @@
 									echo"Il n'y a pas de personne pouvant recevoir vos commandes";
 								}
 								else{
-								$bdd->exec("INSERT INTO commandesdetails VALUES ('$id',' $idCommande','$repas','$ingredients','$sauces','$boissons','$desserts','0')");
-								$bdd->exec("INSERT INTO commandes VALUES ('$idCommande','$numero','0','0','0','$Serveur','0','0','1','0','0','0','0')");
+									if ($solde_final>=0){
+										$bdd->exec("INSERT INTO commandesdetails VALUES ('$id',' $idCommande','$repas','$ingredients','$sauces','$boissons','$desserts','0')");
+										$bdd->exec("INSERT INTO commandes VALUES ('$idCommande','$numero','0','0','0','$Serveur','0','0','1','0','0','0','0')");
+										$bdd->exec("UPDATE comptes SET solde='$solde_final' WHERE nom='MARET'");
+										
+
+									}
+									else{
+										echo 'plop';
+									}
+								
 								}
 								
 							}
