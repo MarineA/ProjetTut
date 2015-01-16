@@ -1,0 +1,9 @@
+achage des mots de passes et gérer les identifiants (ex @, nb de caractères).
+
+
+
+https://education.github.com/pack
+
+
+--> Mettre en ligne le site
+
