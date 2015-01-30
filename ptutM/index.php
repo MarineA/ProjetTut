@@ -47,16 +47,21 @@ if(!empty($_POST)){
 	<head>
 		<meta charset="utf-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=9; IE=10; IE=11"/>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon"  href="images/logo_BDE.ico" />
 		
 	</head>
 
 	
 	<body>
+	<div class="menu">
+		<?php
+			include("menu.php");
+		?>
 	
-	
-
+<div class="contenu">
            
-	<h2>Se connecter</h2>
+	<h1>Se connecter</h1>
 
 Se connecter &agrave; l'espace membre :<br />
     
@@ -72,7 +77,9 @@ Mot de passe : <input type="password" name="password" placeholder="Entrez votre 
 <p> Ou vous enregistrer : 
     <a style="color: #56739A" href="register.php"> S'enregistrer</a></p>
 
-
+</div>
+			
+		</div>
    
 </body>
 </html>

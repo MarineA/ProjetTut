@@ -21,7 +21,7 @@ if(!empty($_GET)){
         $dejactif = $req->rowCount($sql);
         
         if($dejactif == 1){
-            $erroor_actif = 'Utilisateur déja activé !';
+            $error_actif = 'Utilisateur déja activé !';
         } else{
             //Sinon on active l'utilisateur
             $u = array('email'=>$email,'activer'=>'1');
@@ -43,9 +43,8 @@ if(!empty($_GET)){
 <html>
 	<head>
 		<meta charset="utf-8"/>
-		<title> Marine ALCADE </title>
-		<link rel="shortcut icon" type="image/x-icon" href="faviconm.ico" />
-		<link rel="stylesheet" type="text/css" href="design.css">
+		<link rel="stylesheet" href="style.css">
+        <link rel="icon"  href="images/logo_BDE.ico" />
 		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=9; IE=10; IE=11"/>
 		
 	</head>

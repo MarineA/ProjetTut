@@ -12,7 +12,8 @@ if (!empty($_POST) && strlen($_POST['login'])>4 && filter_var($_POST['email'], F
     $sql = 'INSERT INTO membres (login, email, password, token) VALUES (:login, :email, :password, :token)';
     $req = $cnx->prepare($sql);
     $req->execute($q);
-     header('Location:private.php');
+    header('Location:private.php');
+     
     
    /* $to = $email;
     $sujet = 'Activation de votrre compte';
@@ -43,16 +44,23 @@ else {
 <html>
 	<head>
 		<meta charset="utf-8"/>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon"  href="images/logo_BDE.ico" />
 		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=9; IE=10; IE=11"/>
 		
 	</head>
 
 	
 	<body>
-	
+	<div class="menu">
+		<?php
+			include("menu.php");
+		?>
+		
+			<div class="contenu">
 
 
-	<h2>S'enregistrer</h2>
+	<h1>S'enregistrer</h1>
 	
 </br>
 </br>
@@ -78,5 +86,8 @@ Mot de passe : <input type="password" name="password" placeholder="Entrez votre 
 </br>
 </br>
 <p style="text-align:right"> Retour &agrave; la page de membre pour se connecter: <a style="color: #56739A" href="index.php"> ICI </a> </p> 
+
+</div>
+</div>
 </body>
 </html>

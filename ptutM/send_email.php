@@ -102,9 +102,8 @@ if (isset($_POST['envoye']))
 <html>
 	<head>
 		<meta charset="utf-8"/>
-		<title> Marine ALCADE </title>
-		<link rel="shortcut icon" type="image/x-icon" href="faviconm.ico" />
-		<link rel="stylesheet" type="text/css" href="design.css">
+		<link rel="stylesheet" href="style.css">
+        <link rel="icon"  href="images/logo_BDE.ico" />
 		<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=9; IE=10; IE=11"/>
 		
 	</head>
@@ -118,10 +117,21 @@ if (!empty($alert))
     echo '<p style="color:red">'.$alert.'</p>';
 }
 ?>
- 
+  <div class="menu">
+		<?php
+			include("menu.php");
+		?>
+		
+			<div class="contenu">
+                
 <form action="send_email.php" method="post">
     <p>
+        <table>
+            <tr>
+                <td>
         <label for="civilite">Civilit&eacute; :</label>
+                    </td>
+                <td>
         <select id="civilite" name="civilite">
             <option 
                 value="mr"
@@ -156,41 +166,72 @@ if (!empty($alert))
             >
                 Mademoiselle
             </option>
+            </td>
+                </tr>
+            
         </select>
     </p>
     <p>
+        <tr>
+        <td>
         <label for="nom">Entrez votre Nom/Pr&eacute;nom :</label>
+            </td>
+        <td>
         <input type="text" id="nom" name="nom" 
         	value="<?php echo (isset($_POST['nom'])) ? $nom : '' ?>" 
         />
+            </td>
+      </tr>
     </p>
+        
     <p>
+        <tr>
+        <td>
         <label for="email">Entrez votre e-mail :</label>
+            </td>
+            <td>
         <input type="text" id="email" name="email" 
         	value="<?php echo (isset($_POST['email'])) ? $expediteur : '' ?>"
         />
+        </td>
+      </tr>
     </p>
     <p>
+        <tr>
+        <td>
         <label for="sujet">Entrez le sujet :</label>
+        </td>
+            <td>
         <input type="text" id="sujet" name="sujet" 
         	value="<?php echo (isset($_POST['sujet'])) ? $sujet : '' ?>"
         />
+         </td>
+      </tr>
     </p>
     <p>
+        <tr>
+        <td>
         <label for="message">Entrez votre message :</label>
+            </td>
+            <td>
         <textarea id="message" name="message" cols="40" rows="4">
 			<?php echo (isset($_POST['message'])) ? $message : '' ?>
         </textarea>
+        </td>
+      </tr>
     </p>
     <p>
+        </table>
         <input type="submit" name="envoye" value="Envoyer" />
     </p>
 </form>
  
-        <p> Revenir &agrave; la page principale :<a style="color: #56739A"  href="private.php">E-mail</a></p>
+        <p> Revenir &agrave; la page principale :<a style="color: #56739A"  href="private.php">Page Membre</a></p>
 </br>
 </br>
       
+        </div>
+        </html>div>
         
 </body>
 </html>

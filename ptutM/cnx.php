@@ -2,7 +2,7 @@
 $serveur =  'localhost';//iutdoua-webetu.univ-lyon1.fr
 $user = 'root'; //p1301357
 $pass = '';//188364
-$bdd = 'php';//p1301357
+$bdd = 'ptut';//p1301357
 //$port = '3306';
 
 try {
